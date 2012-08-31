@@ -6,9 +6,9 @@ class TubeStatus
   include Cinch::Plugin
 
   match /tube/
-  
+
   def execute(m)
-    response = JSON.parse(RestClient.get 'http://api.tubeupdates.com/?method=get.status&lines=central,circle,hammersmithcity')
+    response = JSON.parse(RestClient.get 'http://api.tubeupdates.com/?method=get.status&lines=central,victoria')
     parsed = response['response']
     if response['response']['lines']
       response['response']['lines'].each do |line|

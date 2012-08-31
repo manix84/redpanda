@@ -1,4 +1,4 @@
 require 'rubygems'
 require 'daemons'
 
-Daemons.run('gradbot.rb')
+Daemons.run('redpanda.rb')
