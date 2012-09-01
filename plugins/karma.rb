@@ -5,7 +5,7 @@ require 'json'
 class Karma
   include Cinch::Plugin
 
-  @@filepath = '/home/jak/bots/redpanda/karma.marshal'
+  @@filepath = '/home/jak/bot/redpanda/karma.marshal'
 
   match /([\w]+)\+\+/, method: :add_karma, use_prefix: false
   match /([\w]+)--/, method: :remove_karma, use_prefix: false
