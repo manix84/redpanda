@@ -16,7 +16,7 @@ class Shortcuts
 	match /set (.+) (.+)/, method: :add_shortcut
 	match /\?(.+)/, method: :get_shortcut, use_prefix: false
 
-	def set(m, command, contents)
+	def add_shortcut(m, command, contents)
 		begin
 			shortcut = Shortcut.first(:command.like => command.downcase.strip)
 			if shortcut.nil?
@@ -33,7 +33,7 @@ class Shortcuts
 		end
 	end
 
-	def get(m, command)
+	def get_shortcut(m, command)
 		begin
 			shortcut = Shortcut.first(:command.like => command.downcase.strip)
 			if shortcut.nil?
