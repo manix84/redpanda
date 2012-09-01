@@ -26,6 +26,7 @@ bot = Cinch::Bot.new do
 		c.port = '6697'
 		c.nick = 'redpanda'
 		c.name = 'redpanda'
+		c.user = 'redpanda'
 		c.realname = 'iPlayer IRC Bot - Jak Spalding'
 		c.channels = ['#iplayer']
 		c.plugins.plugins = [
