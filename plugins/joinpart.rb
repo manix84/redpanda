@@ -16,6 +16,6 @@ class JoinPart
 	def part(m, channel)
 		channel ||= m.channel
 		m.reply "Leaving #{channel} as the request of #{m.user.nick}"
-		Channel(channel).part if channel
+		Channel(channel).part("coz #{m.user.nick} told me too :(") if channel
 	end
 end
