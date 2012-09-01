@@ -13,8 +13,8 @@ end
 class Shortcuts
 	include Cinch::Plugin
 
-	match /set (.+) (.+)/, method: :add_shortcut
-	match /\?(.+)/, method: :get_shortcut, use_prefix: false
+	match /set ([A-Za-z0-9]+) (.+)/, method: :add_shortcut
+	match /\?([A-Za-z0-9]+)/, method: :get_shortcut, use_prefix: false
 
 	def add_shortcut(m, command, contents)
 		begin
