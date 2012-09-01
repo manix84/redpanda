@@ -7,6 +7,7 @@ class JoinPart
 	match /part(?: (.+))?/, method: :part
 
 	def join(m, channel)
+		channel = "##{channel}" unless channel[0,1] == "#"
 		m.reply "Joining #{channel} at the request of #{m.user.nick}"
 		c = Channel(channel)
 		c.join
