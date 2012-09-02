@@ -1,4 +1,5 @@
 DBFILE      = "/home/jak/bot/redpanda/sqlite.db"
+CERTIFICATE_PATH = '/home/jak/certs/dev.bbc.co.uk.pem'
 
 require 'cinch'
 require 'data_mapper'
@@ -9,6 +10,7 @@ require_relative 'plugins/hudsonbots.rb'
 require_relative 'plugins/joinpart.rb'
 require_relative 'plugins/help.rb'
 require_relative 'plugins/shortcuts.rb'
+require_relative 'plugins/jira.rb'
 
 DataMapper::Logger.new($stdout, :debug)
 DataMapper.setup(:default, 'sqlite:///' + DBFILE)
@@ -36,11 +38,12 @@ bot = Cinch::Bot.new do
 			HudsonBots, 
 			JoinPart, 
 			Help, 
-			Shortcuts
+			Shortcuts,
+			Jira
 		]
 		c.ssl.use = true
 		c.ssl.verify = false
-		c.ssl.client_cert = '/home/jak/certs/dev.bbc.co.uk.pem'
+		c.ssl.client_cert = CERTIFICATE_PATH
 	end
 end
 
