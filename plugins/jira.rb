@@ -13,8 +13,8 @@ class Jira
 
 	def get_issue(m, issue)
 		agent = Mechanize.new
-		agent.certificate = CERTIFICATE_PATH
-		agent.private_key = CERTIFICATE_PATH
+		agent.cert = CERTIFICATE_PATH
+		agent.key = CERTIFICATE_PATH
 		url = "https://jira.dev.bbc.co.uk/browse/#{issue}"
 		title = agent.get(url).title
 		m.reply "#{title} - [ #{url}  ]"
