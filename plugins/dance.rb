@@ -1,10 +1,9 @@
 require 'cinch'
 
-class DoDance
+class Dance
 	include Cinch::Plugin
 
-	react_on :channel
-	match /dance/
+	match /dance/, react_on: :channel
 
 	def initialize(*args)
 		super
