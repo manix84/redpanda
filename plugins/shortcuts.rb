@@ -20,7 +20,7 @@ class Shortcuts
 		begin
 			shortcut = Shortcut.first_or_new(
 				{ :command.like => command.downcase.strip },
-				{ :command = > command.downcase.strip }
+				{ :command => command.downcase.strip }
 			)
 			shortcut.contents = contents
 			shortcut.created_by = m.user.nick
