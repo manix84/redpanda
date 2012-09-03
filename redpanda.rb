@@ -1,4 +1,4 @@
-require 'config.rb'
+require_relative 'config.rb'
 
 require 'cinch'
 require 'data_mapper'
