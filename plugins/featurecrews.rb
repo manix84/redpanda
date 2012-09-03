@@ -29,7 +29,7 @@ class FeatureCrews
 	match /team list$/, method: :list_teams
 	match /team help/, method: :help
 	match /team$/, method: :help
-	match /^([A-Za-z]+)[,:]/, method: :list_team, use_prefix: false
+	match /^([A-Za-z]+)[s]?[,:]/, method: :list_members, use_prefix: false
 
 	def help(m)
 		m.reply "Usage: !team (add|remove) <team> <nickname>"
@@ -49,7 +49,7 @@ class FeatureCrews
 
 	def delete_team(m, team_name)
 		begin
-			team = Team.get(team_name)
+			team = Team.get(team_name.downcase)
 			team.destroy
 			m.reply "Team deleted :-("
 		rescue
@@ -59,7 +59,7 @@ class FeatureCrews
 
 	def add_member(m, team_name, member_name)
 		begin
-			team = Team.get(team_name)
+			team = Team.get(team_name.downcase)
 			member = Member.create(:nick => member_name, :team => team)
 			m.reply "Added #{member_name} to #{team_name}"
 		rescue
@@ -69,7 +69,7 @@ class FeatureCrews
 
 	def remove_member(m, team_name, member_name)
 		begin
-			member = Team.get(team_name).members.first(:nick => member_name)
+			member = Team.get(team_name.downcase).members.first(:nick => member_name)
 			if member.nil?
 				m.reply "Couldn't find #{member_name} in Team #{team_name.capitalize}"
 				return
@@ -83,20 +83,20 @@ class FeatureCrews
 
 	def list_members(m, team_name)
 		begin
-			team = Team.get(team_name)
+			members = Team.get(team_name.downcase).members.all(fields: [:nick])
 			nicks = []
-			team.members.each do |member|
+			members.each do |member|
 				nicks << member.nick
 			end
 			m.reply nicks.join(', ')
 		rescue
-			m.reply "Uh-oh spaghetti-o's"
+			#do nothing, because this listens to conversations too!
 		end
 	end
 
 	def list_teams(m)
 		begin
-			teams = Team.all
+			teams = Team.all(fields: [:name])
 			names = []
 			teams.each do |team|
 				names << "Team #{team.name.capitalize}"
