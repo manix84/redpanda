@@ -4,8 +4,8 @@ require 'mechanize'
 class Jira
 	include Cinch::Plugin
 
-	match /[ ^]([A-Za-z]+-[0-9]+)[ $]/, method: :get_issue, use_prefix: false
-	match /[ ^]([4-9][0-9]{3})[ $]/, method: :get_iplayer_issue, use_prefix: false
+	match /(?:\s|^)([A-Za-z]+-[0-9]+)(?:\s|$)/, method: :get_issue, use_prefix: false
+	match /(?:\s|^)([4-9][0-9]{3})(?:\s|$)/, method: :get_iplayer_issue, use_prefix: false
 
 	def get_iplayer_issue(m, issue_number)
 		get_issue m, "IPLAYER-#{issue_number}"
