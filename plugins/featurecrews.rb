@@ -30,6 +30,7 @@ class FeatureCrews
 	match /team help/, method: :help
 	match /team$/, method: :help
 	match /^([A-Za-z]+?)s?[,:$]/, method: :list_members, use_prefix: false
+	match /^everyone[,:$]/, method: :list_everyone, use_prefix: false
 
 	def help(m)
 		m.reply "Usage: !team (add|remove) <team> <nickname>"
@@ -102,6 +103,19 @@ class FeatureCrews
 				names << "Team #{team.name.capitalize}"
 			end
 			m.reply names.join(', ')
+		rescue
+			m.reply "Uh-oh spaghetti-o's"
+		end
+	end
+
+	def list_everyone(m)
+		begin
+			members = Member.all(fields: [:nick])
+			names = []
+			members.each do |m|
+				names << m.nick
+			end
+			m.reply names.uniq.join(', ')
 		rescue
 			m.reply "Uh-oh spaghetti-o's"
 		end
