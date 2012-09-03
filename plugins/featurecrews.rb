@@ -29,7 +29,7 @@ class FeatureCrews
 	match /team list$/, method: :list_teams
 	match /team help/, method: :help
 	match /team$/, method: :help
-	match /^([A-Za-z]+)[s]?[,:]/, method: :list_members, use_prefix: false
+	match /^([A-Za-z]+?)s?[,:$]/, method: :list_members, use_prefix: false
 
 	def help(m)
 		m.reply "Usage: !team (add|remove) <team> <nickname>"
