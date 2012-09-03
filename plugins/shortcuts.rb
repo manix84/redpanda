@@ -18,12 +18,10 @@ class Shortcuts
 
 	def add_shortcut(m, command, contents)
 		begin
-			shortcut = Shortcut.first(:command.like => command.downcase.strip)
-			if shortcut.nil?
-				shortcut = Shortcut.new(
-					:command => command.downcase.strip
-				)
-			end
+			shortcut = Shortcut.first_or_new(
+				{ :command.like => command.downcase.strip },
+				{ :command = > command.downcase.strip }
+			)
 			shortcut.contents = contents
 			shortcut.created_by = m.user.nick
 			shortcut.save
