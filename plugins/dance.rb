@@ -1,8 +1,9 @@
 require 'cinch'
 
-class Help
+class Dance
 	include Cinch::Plugin
 
+	react_on :channel
 	match /dance/
 
 	def initialize(*args)
@@ -20,6 +21,6 @@ class Help
 	end
 
 	def execute(m)
-		m.reply "huh" 
+		m.channel.action @dances.sample
 	end
 end
