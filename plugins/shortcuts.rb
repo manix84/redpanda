@@ -6,7 +6,7 @@ class Shortcut
 
 	property :id, Serial
 	property :command, String, unique: true
-	property :contents, String
+	property :contents, String, length: 300
 	property :created_by, String
 end
 
