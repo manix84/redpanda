@@ -16,6 +16,7 @@ class Shortcuts
 	match /set ([A-Za-z0-9]+) (.+)/, method: :add_shortcut
 	match /\?([A-Za-z0-9]+)/, method: :get_shortcut, use_prefix: false
 	match /shortcuts/, method: :list_shortcuts
+	match /shortcutdelete ([A-Za-z0-9]+)/, method: :delete_shortcut
 
 	def add_shortcut(m, command, contents)
 		begin
@@ -58,4 +59,19 @@ class Shortcuts
 			m.reply "Uh-oh spaghetti-o's!"
 		end
 	end
+
+	def delete_shortcut(m, command)
+		begin
+			shortcut = Shortcut.first(:command.like => command.downcase.strip)
+			if shortcut.nil?
+				m.reply "Hmm.. no such shortcut in the database"
+				return
+			end
+			shortcut.destroy
+			m.safe_reply "Shortcut ?#{command} deleted."
+		rescue
+			m.reply "Uh-oh spaghetti-o's!"
+		end
+	end
+
 end
