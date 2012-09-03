@@ -1,6 +1,6 @@
 require 'cinch'
 
-class Dance
+class DoDance
 	include Cinch::Plugin
 
 	react_on :channel
