@@ -14,7 +14,7 @@ class Shortcuts
 	include Cinch::Plugin
 
 	match /set ([A-Za-z0-9]+) (.+)/, method: :add_shortcut
-	match /\?([A-Za-z0-9]+)/, method: :get_shortcut, use_prefix: false
+	match /^\?([A-Za-z0-9]+)/, method: :get_shortcut, use_prefix: false
 	match /shortcuts/, method: :list_shortcuts
 	match /shortcutdelete ([A-Za-z0-9]+)/, method: :delete_shortcut
 
