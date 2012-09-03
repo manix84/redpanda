@@ -1,5 +1,4 @@
-DBFILE      = "/home/jak/bot/redpanda/sqlite.db"
-CERTIFICATE_PATH = '/home/jak/certs/dev.bbc.co.uk.pem'
+require 'config.rb'
 
 require 'cinch'
 require 'data_mapper'
@@ -26,8 +25,8 @@ end
 
 bot = Cinch::Bot.new do
 	configure do |c|
-		c.server = 'irc.dev.bbc.co.uk'
-		c.port = '6697'
+		c.server = IRC_SERVER
+		c.port = IRC_PORT
 		c.nick = 'redpanda'
 		c.name = 'redpanda'
 		c.user = 'redpanda'
