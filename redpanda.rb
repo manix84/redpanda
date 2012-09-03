@@ -12,6 +12,7 @@ require_relative 'plugins/help.rb'
 require_relative 'plugins/shortcuts.rb'
 require_relative 'plugins/jira.rb'
 require_relative 'plugins/dance.rb'
+require_relative 'plugins/featurecrews.rb'
 
 DataMapper::Logger.new($stdout, :debug)
 DataMapper.setup(:default, 'sqlite:///' + DBFILE)
@@ -41,7 +42,8 @@ bot = Cinch::Bot.new do
 			Help, 
 			Shortcuts,
 			Jira,
-			Dance
+			Dance,
+			FeatureCrews
 		]
 		c.ssl.use = true
 		c.ssl.verify = false
