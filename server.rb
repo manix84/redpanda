@@ -14,7 +14,7 @@ module Daemons
 end
 
 Daemons.run 'redpanda.rb',
-  :dir => DIR_PATH
+  :dir => DIR_PATH,
   :dir_mode => :normal,
   :ontop => false,
   :log_output => true
