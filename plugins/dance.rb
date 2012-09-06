@@ -16,7 +16,7 @@ class Dance
 			'piroettes',
 			'shuffles',
 			'watches http://i.imgur.com/OwcuA.gif',
-			'does the eletric boogaloo'
+			'does the electric boogaloo'
 		]
 	end
 
