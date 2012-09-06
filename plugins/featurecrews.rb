@@ -1,10 +1,11 @@
 require 'cinch'
 require 'data_mapper'
+require_relative '../admin.rb'
 
 class Team
 	include DataMapper::Resource
 
-	has n, :members
+	has n, :members, constraint: :destroy
 
 	property :name, String, unique: true, key: true
 end
@@ -20,6 +21,7 @@ end
 
 class FeatureCrews
 	include Cinch::Plugin
+	include Admin_Helper
 
 	match /team add ([A-Za-z]+) ([A-Za-z0-9\-]+)/, method: :add_member
 	match /team remove ([A-Za-z]+) ([A-Za-z0-9\-]+)/, method: :remove_member
@@ -39,6 +41,7 @@ class FeatureCrews
 	end
 
 	def create_team(m, team_name)
+		return unless is_admin?(m.user)
 		begin
 			team = Team.create(:name => team_name.downcase.strip)
 			m.safe_reply "Created a new team, Team #{team_name.capitalize}!"
@@ -49,11 +52,12 @@ class FeatureCrews
 	end
 
 	def delete_team(m, team_name)
+		return unless is_admin?(m.user)
 		begin
-			team = Team.get(team_name.downcase)
-			team.destroy
+			Team.get(team_name.downcase).destroy
 			m.reply "Team deleted :-("
-		rescue
+		rescue => error
+			puts error
 			m.reply "Uh-oh spaghetti-o's"
 		end
 	end
