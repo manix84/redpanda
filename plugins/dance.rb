@@ -15,7 +15,8 @@ class Dance
 			'body pops',
 			'piroettes',
 			'shuffles',
-			'watches http://i.imgur.com/OwcuA.gif'
+			'watches http://i.imgur.com/OwcuA.gif',
+			'does the eletric boogaloo'
 		]
 	end
 
