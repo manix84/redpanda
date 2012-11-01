@@ -33,7 +33,7 @@ bot = Cinch::Bot.new do
 		c.name = 'redpanda'
 		c.user = 'redpanda'
 		c.realname = 'iPlayer IRC Bot - Jak Spalding'
-		c.channels = ['#iplayer', '#playback', '#imp', '#banana']
+		c.channels = ['#iplayer', '#playback', '#imp', '#penguins']
 		c.plugins.plugins = [
 			TubeStatus, 
 			Karma, 
