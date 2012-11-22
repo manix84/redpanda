@@ -3,7 +3,6 @@ require_relative 'config.rb'
 require 'cinch'
 require 'data_mapper'
 require_relative 'plugins/tube.rb'
-require_relative 'plugins/karma.rb'
 require_relative 'plugins/iplayer.rb'
 require_relative 'plugins/hudsonbots.rb'
 require_relative 'plugins/joinpart.rb'
@@ -36,7 +35,6 @@ bot = Cinch::Bot.new do
 		c.channels = ['#iplayer', '#playback', '#imp', '#penguins']
 		c.plugins.plugins = [
 			TubeStatus, 
-			Karma, 
 			Iplayer, 
 			HudsonBots, 
 			JoinPart, 
