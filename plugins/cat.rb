@@ -8,7 +8,7 @@ class Cat
   match /cat/
   
   def execute(m)
-    xml = Nokogiri::XML(RestClient.get 'http://thecatapi.com/api/images/get?format=xml&results_per_page=1')
+    xml = Nokogiri::XML(RestClient.get 'http://thecatapi.com/api/images/get?format=xml&type=gif')
     url = xml.xpath('//url')
     if not url.empty?
       m.reply url.text
