@@ -13,6 +13,7 @@ require_relative 'plugins/dance.rb'
 require_relative 'plugins/featurecrews.rb'
 require_relative 'plugins/cat.rb'
 require_relative 'plugins/build.rb'
+require_relative 'plugins/keepnick.rb'
 
 DataMapper::Logger.new($stdout, :debug)
 DataMapper.setup(:default, 'sqlite:///' + DBFILE)
@@ -44,7 +45,8 @@ bot = Cinch::Bot.new do
 			Dance,
 			FeatureCrews,
 			Cat,
-			Build
+			Build,
+			Keepnick
 		]
 		c.ssl.use = true
 		c.ssl.verify = false

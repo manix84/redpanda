@@ -3,3 +3,5 @@ karma
 *.db
 config.rb
 .DS_Store
+output.log
+redpanda.rb.pid
