@@ -8,7 +8,7 @@ class TubeStatus
   match /tube/
 
   def execute(m)
-    response = JSON.parse(RestClient.get 'http://api.tubeupdates.com/?method=get.status&lines=central,victoria,circle')
+    response = JSON.parse(RestClient.get 'http://api.tubeupdates.com/?method=get.status&lines=all')
     parsed = response['response']
     if response['response']['lines']
       response['response']['lines'].each do |line|
