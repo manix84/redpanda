@@ -31,10 +31,10 @@ class FeatureCrews
 	match /team list$/, method: :list_teams
 	match /team help/, method: :help
 	match /team$/, method: :help
-	match /^everyone/i, method: :list_everyone, use_prefix: false
-	match /^everybody/i, method: :list_everyone, use_prefix: false
-	match /^anyone/i, method: :list_everyone, use_prefix: false
-	match /^([A-Za-z]+?)s/i, method: :list_members, use_prefix: false
+	match /^everyone($|,|:|;)/i, method: :list_everyone, use_prefix: false
+	match /^everybody($|,|:|;)/i, method: :list_everyone, use_prefix: false
+	match /^anyone($|,|:|;)/i, method: :list_everyone, use_prefix: false
+	match /^([A-Za-z]+?)s($|,|:|;)/i, method: :list_members, use_prefix: false
 
 	def help(m)
 		m.reply "Usage: !team (add|remove) <team> <nickname>"
