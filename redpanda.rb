@@ -14,6 +14,8 @@ require_relative 'plugins/featurecrews.rb'
 require_relative 'plugins/cat.rb'
 require_relative 'plugins/build.rb'
 require_relative 'plugins/keepnick.rb'
+require_relative 'plugins/motd.rb'
+require_relative 'plugins/ctcp.rb'
 
 DataMapper::Logger.new($stdout, :debug)
 DataMapper.setup(:default, 'sqlite:///' + DBFILE)
@@ -33,7 +35,7 @@ bot = Cinch::Bot.new do
 		c.name = 'redpanda'
 		c.user = 'redpanda'
 		c.realname = 'iPlayer Bot - Jak Spalding - try !help'
-		c.channels = ['#iplayer', '#playback', '#imp', '#penguins']
+		c.channels = ['#iplayer', '#playback', '#ibl', '#penguins']
 		c.plugins.plugins = [
 			TubeStatus, 
 			Iplayer, 
@@ -46,7 +48,9 @@ bot = Cinch::Bot.new do
 			FeatureCrews,
 			Cat,
 			Build,
-			Keepnick
+			Keepnick,
+			Motd,
+			Ctcp
 		]
 		c.ssl.use = true
 		c.ssl.verify = false

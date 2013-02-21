@@ -4,9 +4,9 @@ require 'mechanize'
 class Jira
 	include Cinch::Plugin
 
-	match /([A-Za-z]+-[0-9]+)/, method: :get_issue, use_prefix: false
-	match /(?:\s|^)([0-9]{4,5})(?:\s|$)/, method: :get_iplayer_issue, use_prefix: false
-	match /jira ([a-z]+-[0-9]+)/i, method: :get_jira_issue
+	match /\b([a-z]+-[0-9]+)\b/i, method: :get_issue, use_prefix: false, group: :jira
+	match /(?:\s|^)([0-9]{4,5})(?:\s|$)/, method: :get_iplayer_issue, use_prefix: false, group: :jira
+	match /jira ([a-z]+-[0-9]+)/i, method: :get_jira_issue, group: :jira
 
 	def get_iplayer_issue(m, issue_number)
 		return if m.channel != '#iplayer'

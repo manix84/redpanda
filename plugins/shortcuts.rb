@@ -37,9 +37,17 @@ class Shortcuts
 		begin
 			shortcut = Shortcut.first(:command.like => command.downcase.strip)
 			if shortcut.nil?
-				m.safe_reply "Nothing found. Add something using '!set #{command.strip} <useful stuff here>'"
+				shortcuts = Shortcut.all(:command.like => "%#{command.downcase.strip}%")
+				if shortcuts.count == 1
+					m.safe_reply "I don't recognise that. Did you mean #{shortcuts.first.command}? (Type ?#{shortcuts.first.command})"
+				elsif shortcuts.count > 1
+					m.safe_reply "Hmm.. did you mean one of these: #{shortcuts.map { |s| s.command }.join(' ')} ?"
+				else
+					m.safe_reply "Nothing was found! To see all shortcuts, type !shortcuts"
+				end
 			else
-				m.safe_reply "?? " << shortcut.contents
+				m.safe_reply "?? #{shortcut.contents}"
+				m.safe_reply "?? #{shortcut.command} added by #{shortcut.created_by}"
 			end
 		rescue => error
 			m.reply "Uh-oh spaghetti-o's!"

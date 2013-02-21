@@ -3,7 +3,8 @@ require 'json'
 require 'htmlentities'
 
 class TubeStatus
-
+  include Cinch::Plugin
+  
   match /tube$/i
   match /tube (\w+)$/i
 

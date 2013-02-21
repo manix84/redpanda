@@ -5,6 +5,6 @@ class Keepnick
   listen_to :nick
 
   def listen(m)
-    @bot.nick = @bot.shared.nick 
+    @bot.nick = 'redpanda' 
   end
 end
