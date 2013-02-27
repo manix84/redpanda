@@ -7,13 +7,21 @@ class HudsonBots
 
 	def initialize(*args)
 		super
-		@hudsonbots = ["hudson-int-pal", "hudson-test-pal"]
+		@palbots = ["hudson-int-pal", "hudson-test-pal"]
+		@appbots = ["hudson-int-app", "hudson-test-app"]
 	end
 
 	def listen(m)
-		return unless m.channel == '#iplayer'
-		@hudsonbots.each do |bot|
-			m.channel.invite(bot) unless m.channel.has_user?(bot)
+
+		if m.channel == '#iplayer'
+			@palbots.each do |bot|
+				m.channel.invite(bot) 
+			end
+		end
+		if m.channel == '#ibl' 
+			@appbots.each do |bot|
+				m.channel.invite(bot)
+			end
 		end
 	end
 end
