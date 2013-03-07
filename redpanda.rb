@@ -16,6 +16,7 @@ require_relative 'plugins/build.rb'
 require_relative 'plugins/keepnick.rb'
 require_relative 'plugins/motd.rb'
 require_relative 'plugins/ctcp.rb'
+require_relative 'plugins/dontsay.rb'
 
 DataMapper::Logger.new($stdout, :debug)
 DataMapper.setup(:default, 'sqlite:///' + DBFILE)
@@ -50,7 +51,8 @@ bot = Cinch::Bot.new do
 			Build,
 			Keepnick,
 			Motd,
-			Ctcp
+			Ctcp,
+			Dontsay
 		]
 		c.ssl.use = true
 		c.ssl.verify = false
