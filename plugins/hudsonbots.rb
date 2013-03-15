@@ -3,17 +3,19 @@ require 'cinch'
 class HudsonBots
 	include Cinch::Plugin
 
-	listen_to :join
+	timer 30, method: :invite_bots
 
 	def initialize(*args)
 		super
 		@bots = ["hudson-int-pal", "hudson-test-pal","hudson-int-app", "hudson-test-app"]
+		@channels = ["#iplayer", "#ibl"]
 	end
 
-	def listen(m)
-		if m.channel == '#iplayer' or m.channel == '#ibl'
+	def invite_bots
+		@channels.each do |c|
+			channel = Channel(c)
 			@bots.each do |bot|
-				m.channel.invite(bot) 
+				channel.invite bot unless channel.has_user? bot
 			end
 		end
 	end
