@@ -1,4 +1,4 @@
-source :rubygems
+source 'https://rubygems.org'
 gem 'cinch'
 gem 'daemons'
 gem 'rest-client'
@@ -7,3 +7,4 @@ gem 'data_mapper'
 gem 'mechanize'
 gem 'nokogiri'
 gem 'htmlentities'
+gem 'certified'

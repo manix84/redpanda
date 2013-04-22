@@ -30,6 +30,7 @@ class Jira
 
 	def issue_title(issue)
 		agent = Mechanize.new
+		agent.ca_file = CA_PATH
 		agent.cert = CERTIFICATE_PATH
 		agent.key = CERTIFICATE_PATH
 		url = "https://" << JIRA_HOST << "/browse/#{issue}"
