@@ -5,7 +5,7 @@ require 'data_mapper'
 require_relative 'plugins/tube.rb'
 require_relative 'plugins/iplayer.rb'
 require_relative 'plugins/hudsonbots.rb'
-require_relative 'plugins/joinpart.rb'
+require_relative 'plugins/admin.rb'
 require_relative 'plugins/help.rb'
 require_relative 'plugins/shortcuts.rb'
 require_relative 'plugins/jira.rb'
@@ -13,7 +13,6 @@ require_relative 'plugins/dance.rb'
 require_relative 'plugins/featurecrews.rb'
 require_relative 'plugins/cat.rb'
 require_relative 'plugins/build.rb'
-require_relative 'plugins/keepnick.rb'
 require_relative 'plugins/motd.rb'
 require_relative 'plugins/ctcp.rb'
 require_relative 'plugins/dontsay.rb'
@@ -43,7 +42,7 @@ bot = Cinch::Bot.new do
 			TubeStatus, 
 			Iplayer, 
 			HudsonBots, 
-			JoinPart, 
+		  Admin, 
 			Help, 
 			Shortcuts,
 			Jira,
@@ -51,7 +50,6 @@ bot = Cinch::Bot.new do
 			FeatureCrews,
 			Cat,
 			Build,
-			Keepnick,
 			Motd,
 			Ctcp,
 			Dontsay,
