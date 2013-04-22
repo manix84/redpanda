@@ -18,6 +18,7 @@ require_relative 'plugins/motd.rb'
 require_relative 'plugins/ctcp.rb'
 require_relative 'plugins/dontsay.rb'
 require_relative 'plugins/md5.rb'
+require_relative 'plugins/codereview.rb'
 
 DataMapper::Logger.new($stdout, :debug)
 DataMapper.setup(:default, 'sqlite:///' + DBFILE)
@@ -54,7 +55,8 @@ bot = Cinch::Bot.new do
 			Motd,
 			Ctcp,
 			Dontsay,
-			Md5
+			Md5,
+      Codereview
 		]
 		c.ssl.use = true
 		c.ssl.verify = false
