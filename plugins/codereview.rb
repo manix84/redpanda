@@ -6,7 +6,7 @@ class Codereview
 	include Cinch::Plugin
 
 	match /reviews/i, method: :execute
-  timer 1800, method: :notify
+  timer 3600, method: :notify
 
 	def initialize(*args)
 		super
