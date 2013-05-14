@@ -35,7 +35,7 @@ class Jira
 		agent.key = CERTIFICATE_PATH
 		url = "https://" << JIRA_HOST << "/browse/#{issue}"
 		title = agent.get(url).title
-		return "" if title.start_with? "ISSUE DOES NOT EXIST"
+		return "" if title.upcase.start_with? "ISSUE DOES NOT EXIST"
 		return "#{title} - [ #{url} ]"
 	end
 
