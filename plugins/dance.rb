@@ -13,7 +13,7 @@ class Dance
 			'jives',
 			'waltzes',
 			'body pops',
-			'piroettes',
+			'pirouettes',
 			'shuffles',
 			'watches http://i.imgur.com/OwcuA.gif',
 			'does the electric boogaloo'
