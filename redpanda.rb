@@ -21,7 +21,7 @@ require_relative 'plugins/codereview.rb'
 require_relative 'plugins/fishslap.rb'
 
 DataMapper::Logger.new($stdout, :debug)
-DataMapper.setup(:default, 'sqlite:///' + DBFILE)
+DataMapper.setup(:default, DB_CONN_STRING)
 
 # If database doesn't exist, create. Else update
 if File.exists?(DBFILE)
@@ -34,11 +34,11 @@ bot = Cinch::Bot.new do
 	configure do |c|
 		c.server = IRC_SERVER
 		c.port = IRC_PORT
-		c.nick = 'redpanda'
-		c.name = 'redpanda'
-		c.user = 'redpanda'
+		c.nick = 'fabulouspony'
+		c.name = 'fabulouspony'
+		c.user = 'fabulouspony'
 		c.realname = 'iPlayer Bot - Jak Spalding - try !help'
-		c.channels = ['#iplayer', '#playback', '#ibl', '#penguins']
+		c.channels = ['#iplayer', '#playback', '#ibl']
 		c.plugins.plugins = [
 			TubeStatus, 
 			Iplayer, 
