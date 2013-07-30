@@ -2,23 +2,8 @@ require_relative 'config.rb'
 
 require 'cinch'
 require 'data_mapper'
-require_relative 'plugins/tube.rb'
-require_relative 'plugins/iplayer.rb'
-require_relative 'plugins/hudsonbots.rb'
-require_relative 'plugins/admin.rb'
-require_relative 'plugins/help.rb'
-require_relative 'plugins/shortcuts.rb'
-require_relative 'plugins/jira.rb'
-require_relative 'plugins/dance.rb'
-require_relative 'plugins/featurecrews.rb'
-require_relative 'plugins/cat.rb'
-require_relative 'plugins/build.rb'
-require_relative 'plugins/motd.rb'
-require_relative 'plugins/ctcp.rb'
-require_relative 'plugins/dontsay.rb'
-require_relative 'plugins/md5.rb'
-require_relative 'plugins/codereview.rb'
-require_relative 'plugins/fishslap.rb'
+project_root = File.dirname(File.absolute_path(__FILE__))
+Dir.glob(project_root + '/plugins/*') {|file| require file}
 
 DataMapper::Logger.new($stdout, :debug)
 DataMapper.setup(:default, DB_CONN_STRING)
