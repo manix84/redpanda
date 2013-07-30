@@ -47,7 +47,6 @@ class Shortcuts
 				end
 			else
 				m.safe_reply "?? #{shortcut.contents}"
-				m.safe_reply "?? #{shortcut.command} added by #{shortcut.created_by}"
 			end
 		rescue => error
 			m.reply "Uh-oh spaghetti-o's!"
