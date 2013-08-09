@@ -41,7 +41,7 @@ class Codereview
 		agent.ca_file = CA_PATH
 		agent.cert = CERTIFICATE_PATH
 		agent.key = CERTIFICATE_PATH
-    jira_query = URI::encode('project = "iPlayer Business Layer" and status = "In Progress" and type = Story and (comment ~ "revue.io" or Labels in (needs_review))')
+    jira_query = URI::encode('project = "iPlayer Business Layer" and status = "Resolved" and type in (Bug,Story)')
 		url = "https://#{JIRA_HOST}/sr/jira.issueviews:searchrequest-xml/temp/SearchRequest.xml?jqlQuery=#{jira_query}&tempMax=1000"
 		return Nokogiri::XML(agent.get(url).content).xpath('//item')
 	end
