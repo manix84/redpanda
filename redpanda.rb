@@ -8,12 +8,7 @@ Dir.glob(project_root + '/plugins/*') {|file| require file}
 DataMapper::Logger.new($stdout, :debug)
 DataMapper.setup(:default, DB_CONN_STRING)
 
-# If database doesn't exist, create. Else update
-if File.exists?(DBFILE)
-	DataMapper.auto_upgrade!
-else
-	DataMapper.auto_migrate!
-end
+DataMapper.auto_upgrade!
 
 bot = Cinch::Bot.new do
 	configure do |c|
