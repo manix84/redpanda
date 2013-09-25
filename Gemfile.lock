@@ -2,9 +2,9 @@ GEM
   remote: https://rubygems.org/
   specs:
     addressable (2.3.5)
-    bcrypt-ruby (3.1.1)
+    bcrypt-ruby (3.1.2)
     certified (0.1.1)
-    cinch (2.0.7)
+    cinch (2.0.9)
     daemons (1.1.9)
     data_mapper (1.2.0)
       dm-aggregates (~> 1.2.0)
@@ -54,15 +54,28 @@ GEM
       dm-core (~> 1.2.0)
     do_postgres (0.10.13)
       data_objects (= 0.10.13)
-    domain_name (0.5.12)
+    domain_name (0.5.13)
       unf (>= 0.0.5, < 1.0.0)
+    faraday (0.8.8)
+      multipart-post (~> 1.2.0)
     fastercsv (1.5.5)
+    github_api (0.10.2)
+      addressable
+      faraday (~> 0.8.7)
+      hashie (>= 1.2)
+      multi_json (~> 1.4)
+      nokogiri (~> 1.6.0)
+      oauth2
+    hashie (2.0.5)
     htmlentities (4.3.1)
-    http-cookie (1.0.1)
+    http-cookie (1.0.2)
       domain_name (~> 0.5)
+    httpauth (0.2.0)
     json (1.8.0)
     json_pure (1.8.0)
-    mechanize (2.7.1)
+    jwt (0.1.8)
+      multi_json (>= 1.5)
+    mechanize (2.7.2)
       domain_name (~> 0.5, >= 0.5.1)
       http-cookie (~> 1.0.0)
       mime-types (~> 1.17, >= 1.17.2)
@@ -71,18 +84,28 @@ GEM
       nokogiri (~> 1.4)
       ntlm-http (~> 0.1, >= 0.1.1)
       webrobots (>= 0.0.9, < 0.2)
-    mime-types (1.23)
+    mime-types (1.25)
     mini_portile (0.5.1)
-    multi_json (1.7.8)
+    multi_json (1.8.0)
+    multi_xml (0.5.5)
+    multipart-post (1.2.0)
     net-http-digest_auth (1.4)
     net-http-persistent (2.9)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
     ntlm-http (0.1.1)
+    oauth2 (0.9.2)
+      faraday (~> 0.8)
+      httpauth (~> 0.2)
+      jwt (~> 0.1.4)
+      multi_json (~> 1.0)
+      multi_xml (~> 0.5)
+      rack (~> 1.2)
+    rack (1.5.2)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     stringex (1.5.1)
-    unf (0.1.1)
+    unf (0.1.2)
       unf_ext
     unf_ext (0.0.6)
     uuidtools (2.1.4)
@@ -97,6 +120,7 @@ DEPENDENCIES
   daemons
   data_mapper
   dm-postgres-adapter
+  github_api
   htmlentities
   mechanize
   nokogiri

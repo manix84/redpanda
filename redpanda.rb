@@ -37,7 +37,8 @@ bot = Cinch::Bot.new do
 			Md5,
       Codereview,
       Fishslap,
-      Excuse
+      Excuse,
+      PullRequest
 		]
 		c.ssl.use = true
 		c.ssl.verify = false
