@@ -8,6 +8,7 @@ class Team
 	has n, :members, constraint: :destroy
 
 	property :name, String, unique: true, key: true
+  property :channel, String
 end
 
 class Member
@@ -27,17 +28,20 @@ class FeatureCrews
 	match /team remove ([A-Za-z]+) ([A-Za-z0-9\-]+)/, method: :remove_member
 	match /team create ([A-Za-z]+)/, method: :create_team
 	match /team delete ([A-Za-z]+)/, method: :delete_team
-	match /team members ([A-Za-z]+)/, method: :list_members
+	match /team members ([A-Za-z]+)/, method: :always_list_members
 	match /team list$/, method: :list_teams
 	match /team help/, method: :help
 	match /team$/, method: :help
 	match /^((has|does|is)\s*)?(any|every)(one|body)/i, method: :list_everyone, use_prefix: false
-	match /([a-z]+)'?s/i, method: :list_members, use_prefix: false
-	match /team ([a-z]+)/i, method: :list_members, use_prefix: false
+	match /([a-z]+)'?s\b/i, method: :sometimes_list_members, use_prefix: false
+	match /team ([a-z]+)\b/i, method: :sometimes_list_members, use_prefix: false
+  match /team chanassign ([A-Za-z]+) ?(#[A-Za-z0-9\-_]+)?$/, method: :assign_channel
+  match /team chanassign ([A-Za-z]+) all$/, method: :unassign_channel
 
 	def help(m)
 		m.reply "Usage: !team (add|remove) <team> <nickname>"
-		m.reply "Usage: !team (members|create|delete) <team>"
+    m.reply "Usage: !team chanassign <team> (<#channel>|all)"
+    m.reply "Usage: !team (members|create|delete) <team>"
 		m.reply "Usage: !team (list|help)"
 	end
 
@@ -63,6 +67,32 @@ class FeatureCrews
 		end
 	end
 
+  def assign_channel(m, team_name, channel_name)
+    return unless is_admin?(m.user)
+    begin
+      team = Team.get(team_name.downcase)      
+      team.channel = channel_name || m.channel
+      team.save
+      m.safe_reply "Team #{team_name} now assigned to #{team.channel}"
+    rescue => e
+      m.reply "Uh-oh spaghetti-o's"
+      puts e
+    end
+  end
+
+  def unassign_channel(m, team_name)
+    return unless is_admin?(m.user)
+    begin
+      team = Team.get(team_name.downcase)
+      team.channel = nil
+      team.save
+      m.safe_reply "Team #{team_name} no longer assigned to any channel"
+    rescue => e
+      m.reply "Uh-oh spaghetti-o's"
+      puts e
+    end
+  end
+
 	def add_member(m, team_name, member_name)
 		begin
 			team = Team.get(team_name.downcase)
@@ -87,14 +117,25 @@ class FeatureCrews
 		end
 	end
 
-	def list_members(m, team_name)
+  def always_list_members(m, team_name) 
+    list_members(m, team_name, true)
+  end
+
+  def sometimes_list_members(m, team_name)
+    list_members(m, team_name, false)
+  end
+
+	def list_members(m, team_name, always_speak)
 		begin
-			members = Team.get(team_name.downcase).members.all(fields: [:nick])
+      team = Team.get(team_name.downcase)
+      return if !always_speak and (team.channel != m.channel or team.channel == nil)
+			members = team.members.all(fields: [:nick])
 			nicks = []
 			members.each do |member|
 				nicks << member.nick
 			end
 			m.safe_reply nicks.join(', ')
+      m.safe_reply "No team members yet" if always_speak and nicks.empty?
 		rescue
 			#do nothing, because this listens to conversations too!
 		end
@@ -102,10 +143,10 @@ class FeatureCrews
 
 	def list_teams(m)
 		begin
-			teams = Team.all(fields: [:name])
+			teams = Team.all(fields: [:name, :channel])
 			names = []
 			teams.each do |team|
-				names << "Team #{team.name.capitalize}"
+				names << "Team #{team.name.capitalize} (#{team.channel || "All"})"
 			end
 			m.safe_reply names.join(', ')
 		rescue
@@ -115,7 +156,8 @@ class FeatureCrews
 
 	def list_everyone(m)
 		begin
-			members = Member.all(fields: [:nick])
+      teams = Team.all(:channel => m.channel) | Team.all(:channel => nil)
+      members = teams.members.all(fields: [:nick])
 			names = []
 			members.each do |m|
 				names << m.nick
