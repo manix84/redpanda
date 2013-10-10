@@ -8,14 +8,13 @@ class Dance
 	def initialize(*args)
 		super
 		@dances = [
-			'dances',
+      'twerks',
+      'dances',
 			'boogies',
 			'jives',
 			'waltzes',
 			'body pops',
 			'pirouettes',
-			'shuffles',
-			'watches http://i.imgur.com/OwcuA.gif',
 			'does the electric boogaloo'
 		]
 	end
