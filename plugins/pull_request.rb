@@ -4,20 +4,25 @@ require 'github_api'
 class PullRequest
     include Cinch::Plugin
 
-    match %r{(?<!build )#(\d+)\b}, use_prefix: false
+    match %r{([\w\-]+)#(\d+)}, use_prefix: false, method: :with_project, group: :pull
+    match %r{#(\d+)}, use_prefix: false, method: :without_project, group: :pull
    
-    def execute(m, issue)
-      repos = { 
+    def without_project(m, issue)
+      default_repos = { 
         "#iplayer" => "responsive-web",
         "#ibl" => "ibl"
       }
-      if not repos.has_key?(m.channel) then
+      if not default_repos.has_key?(m.channel) then
         puts "Channel #{m.channel} is not recognised by PullRequest"
         return
       end
+      with_project(m, default_repos[m.channel], issue)
+    end
+
+    def with_project(m, project, issue)
       begin
         github = Github.new basic_auth: GITHUB_BASICAUTH
-        issue = github.issues.get 'iplayer', repos[m.channel], issue
+        issue = github.issues.get 'iplayer', project, issue
         m.reply "#{issue.title} [ #{issue.html_url} ]"
       rescue Github::Error::NotFound => e
         puts "Error #{e} for #{issue} on #{m.channel}"
