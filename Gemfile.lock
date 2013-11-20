@@ -104,6 +104,7 @@ GEM
     rack (1.5.2)
     rest-client (1.6.7)
       mime-types (>= 1.16)
+    statsd-ruby (1.2.1)
     stringex (1.5.1)
     unf (0.1.2)
       unf_ext
@@ -125,3 +126,4 @@ DEPENDENCIES
   mechanize
   nokogiri
   rest-client
+  statsd-ruby
