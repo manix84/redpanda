@@ -23,7 +23,7 @@ class Admin
 	end
 
   def nick(m, name)
-    return unless is_admin?(m.user)
+###    return unless is_admin?(m.user)
     @bot.nick = name
   end
 
