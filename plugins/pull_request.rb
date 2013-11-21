@@ -8,6 +8,7 @@ class PullRequest
     match %r{#(\d+)}, use_prefix: false, method: :without_project, group: :pull
    
     def without_project(m, issue)
+      return if m.user.nick.include? "hudson"
       default_repos = { 
         "#iplayer" => "responsive-web",
         "#ibl" => "ibl"
