@@ -4,7 +4,7 @@ require_relative '../admin.rb'
 
 class AutojoinChannel
 	include DataMapper::Resource
-
+  property :id, Serial
 	property :channel, String, unique: true
 end
 
@@ -13,7 +13,14 @@ class Autojoin
 	include Admin_Helper
 
 	match /autojoin(?: (.+))?/, method: :add
-	match /autojoinoff(?: (.+))?/, method: :remove
+	match /autojoinoff(?: (.+))?/, method: :remove 
+  listen_to :"255", method: :autojoin
+
+  def autojoin(m)
+    channel_list.each do |c|
+      Channel(c).join
+    end
+  end
 
 	def add(m, channel)
 		return if is_not_admin(m)
@@ -82,5 +89,4 @@ class Autojoin
 				puts error
 			end
 		end
-	end
 end

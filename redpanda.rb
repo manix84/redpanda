@@ -18,7 +18,7 @@ bot = Cinch::Bot.new do
 		c.name = 'iPlayerBot'
 		c.user = 'iPlayerBot'
 		c.realname = 'iPlayer Bot - Jak Spalding - try !help'
-		c.channels = ['#iplayer', '#playback', '#ibl']
+		c.channels = ['#iplayer']
 		c.plugins.plugins = [
 			TubeStatus, 
 			Iplayer, 
