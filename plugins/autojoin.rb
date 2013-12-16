@@ -12,9 +12,15 @@ class Autojoin
 	include Cinch::Plugin
 	include Admin_Helper
 
-	match /autojoin(?: (.+))?/, method: :add
-	match /autojoinoff(?: (.+))?/, method: :remove 
+	match /autojoin(?: (.+))?$/, method: :add
+	match /autojoinoff(?: (.+))?$/, method: :remove 
+  match /autojoinlist$/, method: :list
   listen_to :"255", method: :autojoin
+
+  def list(m)
+    channels = channel_list.join(", ")
+    m.reply "Currently autojoining: #{channels}"
+  end
 
   def autojoin(m)
     channel_list.each do |c|
@@ -25,7 +31,7 @@ class Autojoin
 	def add(m, channel)
 		return if is_not_admin(m)
 	
-		channel = get_channel_or_default channel, m.channel	
+		channel = get_channel_or_default channel, m.channel.name	
 		
 		if channel_list.include? channel
 			m.reply "Already autojoining"
@@ -39,7 +45,7 @@ class Autojoin
 	def remove(m, channel)
 		return if is_not_admin(m)
 		
-		channel = get_channel_or_default channel, m.channel
+		channel = get_channel_or_default channel, m.channel.name
 		
 		if channel_list.include? channel
 			remove_channel channel
