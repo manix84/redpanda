@@ -14,16 +14,16 @@ bot = Cinch::Bot.new do
 	configure do |c|
 		c.server = IRC_SERVER
 		c.port = IRC_PORT
-		c.nick = 'fabulouspony'
-		c.name = 'fabulouspony'
-		c.user = 'fabulouspony'
+		c.nick = 'iPlayerBot'
+		c.name = 'iPlayerBot'
+		c.user = 'iPlayerBot'
 		c.realname = 'iPlayer Bot - Jak Spalding - try !help'
 		c.channels = ['#iplayer', '#playback', '#ibl']
 		c.plugins.plugins = [
 			TubeStatus, 
 			Iplayer, 
 			HudsonBots, 
-		  Admin, 
+			Admin, 
 			Help, 
 			Shortcuts,
 			Jira,
@@ -35,11 +35,12 @@ bot = Cinch::Bot.new do
 			Ctcp,
 			Dontsay,
 			Md5,
-      Codereview,
-      Fishslap,
-      Excuse,
-      PullRequest,
-      Chatty
+			Codereview,
+			Fishslap,
+			Excuse,
+			PullRequest,
+			Chatty,
+			Autojoin
 		]
 		c.ssl.use = true
 		c.ssl.verify = false
