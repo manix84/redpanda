@@ -3,7 +3,7 @@ require 'cinch'
 class Dance
 	include Cinch::Plugin
 
-	match /dance/, react_on: :channel
+	match /dance(?: (.+))?$/, react_on: :channel
 
 	def initialize(*args)
 		super
@@ -19,7 +19,7 @@ class Dance
 		]
 	end
 
-	def execute(m)
-		m.channel.action @dances.sample
+	def execute(m, extra)
+		m.channel.action "#{@dances.sample} #{extra}"
 	end
 end
